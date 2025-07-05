@@ -6,6 +6,28 @@
     if(isset($_GET["error"])){
         $error = $_GET["error"];
     }
+
+    // Recuperar variables d'entorn
+$dbHost = getenv('DB_HOST');
+$dbName = "usuaris";
+$dbUser = getenv('DB_USER');
+$dbPass = getenv('DB_PASSWORD');
+
+if (!$dbHost || !$dbUser || $dbPass === false) {
+    //throw new \RuntimeException('Falten variables d\'entorn per a la connexió a la base de dades.');
+    header("Location: index.php?error=connexio");
+    die();
+}
+
+require 'vendor/autoload.php';
+
+use MicrosoftAzure\Storage\Blob\BlobRestProxy;
+use MicrosoftAzure\Storage\Blob\Models\ListBlobsOptions;
+use MicrosoftAzure\Storage\Common\Exceptions\ServiceException;
+
+// DSN amb charset utf8mb4
+$dsn = "mysql:host={$dbHost};dbname={$dbName};charset=utf8mb4";
+
 ?>
 <!DOCTYPE html>
 <html lang="ca">
@@ -24,41 +46,44 @@
         </header>
         <main>
             <?php
-            if(strcmp($error,"")!=0){
-                echo '<h4>Error: '.$error.'</h4>';
-            }
-            ?>
-            <form id="formUsuari" name="formUsuari" method="POST" action="processaCreacio.php" enctype="multipart/form-data" action="./usuaris.php">
-                <div class="filaform">
-                    <label for="nom" class="obligatori">Nom:</label>
-                    <input type="text" id="nom" name="nom" placeholder="nom de l'usuari" required>
-                </div>
-                <div  class="filaform">
-                    <label for="cognoms" class="obligatori">Cognoms:</label>
-                    <input type="text" id="cognoms" name="cognoms" placeholder="cognoms de l'usuari" required>
-                </div>
-                <div  class="filaform">
-                    <label for="email" class="obligatori">Email:</label>
-                    <input type="email" id="email" name="email" placeholder="email de l'usuari">
-                </div>
-                <div class="filaform">
-                    <label for="cicle" class="obligatori">Cicle:</label>
-                    <select name="cicle">
-                        <option value="SMX">SMX</option>
-                        <option value="ASIX">ASIX</option>
-                        <option value="DAM">DAM</option>
-                        <option value="DAW">DAW</option>
-                    </select>
-                </div>
-                <div class="filaform">
-                    <label for="document" class="obligatori">Document PDF:</label>
-                    <input type="file" name="document" id="document" accept="application/pdf" required>
-                </div>                
-                <div class="filaform">
-                    <button type="submit">Enviar</button>
-                </div>
-                
-            </form>
+                try {
+                    $options = [
+                        // Excepcions en errors
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                        // Fetch com a array associatiu
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                        // Desactivar emulació de prepares
+                        PDO::ATTR_EMULATE_PREPARES => false,
+
+                        // Assegurar la connexió TLS cap a Azure Database for MySQL
+                        PDO::MYSQL_ATTR_SSL_CA => '/etc/ssl/certs/BaltimoreCyberTrustRoot.crt.pem',
+                        // Desactivem la validació del certificat SSL
+                        PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
+                    ];
+
+                    // Crear la connexió PDO
+                    $pdo = new PDO($dsn, $dbUser, $dbPass, $options);
+
+                    echo "<div id=\"contUsuaris\">";
+                    $sql = "SELECT * FROM usuari";
+                    $stmt = $pdo->query($sql);
+                    while ($fila = $stmt->fetch()) {
+                        echo '<div class="cardUsuari">';
+                        echo '<p><strong>ID: </strong>' . $fila['id'] . '</p>';
+                        echo '<p>' . $fila['nom'] . '</p>';
+                        echo '<p>' . $fila['cognoms'] . '</p>';
+                        echo '<p>' . $fila['email'] . '</p>';
+                        echo '<p>' . $fila['data'] . '</p>';
+                        echo '<p><a href="https://cefirestorage02raul.blob.core.windows.net/documentspdf/' . $fila['document'] . '">'. $fila['imatge'] .'</a></p>';
+                        echo '</div>';
+                    }
+                    echo "</div>";
+                } catch (PDOException $e) {
+                    error_log('Error de connexió PDO: ' . $e->getMessage());
+                    echo "Error connectant amb la base de dades: " . htmlspecialchars($e->getMessage());
+                    exit;
+                }
+                ?>
         </main>
         <footer>
             <p>Curs Azure Cefire 2025</p>
