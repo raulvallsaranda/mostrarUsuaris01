@@ -67,7 +67,9 @@ $dsn = "mysql:host={$dbHost};dbname={$dbName};charset=utf8mb4";
                     echo "<div id=\"contUsuaris\">";
                     $sql = "SELECT * FROM usuari";
                     $stmt = $pdo->query($sql);
+                    $i=0;
                     while ($fila = $stmt->fetch()) {
+                        $i++;
                         echo '<div class="cardUsuari">';
                         echo '<p><strong>ID: </strong>' . $fila['id'] . '</p>';
                         echo '<p>' . $fila['nom'] . '</p>';
@@ -76,6 +78,9 @@ $dsn = "mysql:host={$dbHost};dbname={$dbName};charset=utf8mb4";
                         echo '<p>' . $fila['data'] . '</p>';
                         echo '<p><a href="https://cefirestorage02raul.blob.core.windows.net/documentspdf/' . $fila['document'] . '">'. $fila['document'] .'</a></p>';
                         echo '</div>';
+                    }
+                    if($i==0){
+                         echo '<p>No hi ha usuaris per a mostrar.</p>';
                     }
                     echo "</div>";
                 } catch (PDOException $e) {
