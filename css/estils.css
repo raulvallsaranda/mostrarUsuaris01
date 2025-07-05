@@ -118,7 +118,7 @@ button{
     font-size:1.5em;
 }
 
-main div #contUsuaris{
+main #contUsuaris{
     border: solid 1px black;
     width:90%;
     margin:10px auto;
@@ -130,7 +130,7 @@ main div #contUsuaris{
     background-color: rgb(240, 191, 222);
 }
 
-main div div div.cardUsuari{
+main div div.cardUsuari{
     width:30%;
     margin:5px;
     padding:5px;
@@ -138,7 +138,7 @@ main div div div.cardUsuari{
     background-color: rgb(210, 255, 213);
 }
 
-main div div div.cardUsuari p{
+main div div.cardUsuari p{
     padding:5px; 
     font-size:15px;
     background-color: white;

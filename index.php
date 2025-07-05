@@ -74,7 +74,7 @@ $dsn = "mysql:host={$dbHost};dbname={$dbName};charset=utf8mb4";
                         echo '<p>' . $fila['cognoms'] . '</p>';
                         echo '<p>' . $fila['email'] . '</p>';
                         echo '<p>' . $fila['data'] . '</p>';
-                        echo '<p><a href="https://cefirestorage02raul.blob.core.windows.net/documentspdf/' . $fila['document'] . '">'. $fila['imatge'] .'</a></p>';
+                        echo '<p><a href="https://cefirestorage02raul.blob.core.windows.net/documentspdf/' . $fila['document'] . '">'. $fila['document'] .'</a></p>';
                         echo '</div>';
                     }
                     echo "</div>";
