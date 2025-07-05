@@ -1,0 +1,17 @@
+{
+    "name": "cefireraul/mostrar-usuaris01",
+    "autoload": {
+        "psr-4": {
+            "Cefireraul\\MostrarUsuaris01\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Raül Valls Aranda",
+            "email": "r.vallsaranda@edu.gva.es"
+        }
+    ],
+    "require": {
+      "microsoft/azure-storage-blob": "^1.5"
+    }
+}

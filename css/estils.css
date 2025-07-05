@@ -1,0 +1,150 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    text-align: center;
+    background-color: #DDD;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#wrapper{
+    width:80%;
+    margin: 10px auto;
+}
+
+header{
+    margin: 10px auto;
+    border: solid 4px blue;
+    width: 80%;
+    text-align: center;
+    padding:10px;
+    background-color:azure;
+}
+
+header h1{
+    margin: 10px auto;
+    border: solid 2px red;
+    width: 80%;
+    text-align: center;
+    padding:10px;
+    background-color:white;
+}
+header h2{
+    margin: 10px auto;
+    border: solid 2px purple;
+    width: 60%;
+    text-align: center;
+    padding:10px;
+    background-color:white;
+}
+
+main{
+    margin: 10px auto;
+    min-height: 400px;
+    border: solid 4px red;
+    width: 80%;
+    text-align: center;
+    padding:10px;
+    background-color:rgb(200, 243, 183);
+}
+main p{
+    margin: 10px auto;
+    border: solid 2px green;
+    width: 80%;
+    text-align: center;
+    padding:10px;
+    line-height: 50px;
+    font-size:2em;
+    background-color:rgb(255, 250, 186);
+}
+
+footer{
+    margin: 10px auto;
+    border: solid 4px blue;
+    width: 80%;
+    text-align: center;
+    padding:10px;
+    background-color:azure;
+}
+footer p{
+    margin: 10px auto;
+    border: solid 2px red;
+    width: 80%;
+    text-align: center;
+    padding:10px;
+    background-color:white;
+}
+
+main form div.filaform{
+    width:60%;
+    border:solid 1px black;
+    margin:10px auto;
+    padding:10px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color:white;
+}
+h4{
+    width:40%;
+    color:red;
+    font-size:1.5em;
+    border:solid 5px red;
+    background-color:yellow;
+    text-align:center;
+    padding:10px;
+    margin: 10px auto;
+}
+
+main form div label{
+    margin:10px;
+    font-weight: bold;
+    color:blue;
+}
+
+main form div input{
+    padding: 5px;
+    width:40%;
+    text-align:center;
+}
+main form div label.obligatori:after{
+    color:red;
+    content: '*';
+}
+button{
+    padding:5px;
+    font-size:1.5em;
+}
+
+main div #contUsuaris{
+    border: solid 1px black;
+    width:90%;
+    margin:10px auto;
+    padding:10px;
+    display:flex;
+    justify-content: center;
+    align-items:start;
+    flex-wrap: wrap;
+    background-color: rgb(240, 191, 222);
+}
+
+main div div div.cardUsuari{
+    width:30%;
+    margin:5px;
+    padding:5px;
+    font-size:1em;
+    background-color: rgb(210, 255, 213);
+}
+
+main div div div.cardUsuari p{
+    padding:5px; 
+    font-size:15px;
+    background-color: white;
+    border: solid 2px green;
+}
+
+.imatgeUsuari{
+    width:90%;
+}
