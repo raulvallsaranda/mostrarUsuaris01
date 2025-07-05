@@ -34,15 +34,15 @@ $dsn = "mysql:host={$dbHost};dbname={$dbName};charset=utf8mb4";
 
 <head>
     <meta charset="utf-8">
-    <title>Projecte Final Azure Crear Usuari</title>
+    <title>Projecte Final Azure Mostrar Usuaris</title>
     <link rel="stylesheet" href="css/estils.css">
 </head>
 
 <body>
     <div id="wrapper">
         <header>
-            <h1>Projecte Final Azure Crear Usuari</h1>
-            <h2>Webapp02</h2>
+            <h1>Projecte Final Azure Mostrar Usuaris</h1>
+            <h2>Webapp01</h2>
         </header>
         <main>
             <?php
